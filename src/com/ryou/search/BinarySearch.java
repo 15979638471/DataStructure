@@ -25,6 +25,6 @@ public class BinarySearch {
 		int[] arr = {43,22,15,35,33,24,16,77,86,94};
 		Arrays.sort(arr);
 		System.out.println(Arrays.toString(arr));
-		System.out.println(binary(arr, 94));;
+		System.out.println(binary(arr, 94));
 	}
 }
