@@ -13,7 +13,7 @@ public class Sort {
 //		int[] arr = {19,2,88,7,33,51,22,13};
 		int[] arr = new int[10000000];
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (int) (Math.random() * 100000);
+			arr[i] = (int) (Math.random() * 10000000);
 		}
 		//测试冒泡排序
 //		bubbleSort(Arrays.copyOf(arr, 100000));

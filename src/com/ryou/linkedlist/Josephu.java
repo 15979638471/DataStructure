@@ -3,38 +3,38 @@ package com.ryou.linkedlist;
 public class Josephu {
 	
 	public static void main(String[] args) {
-		// ²âÊÔ¹¹½¨»·ĞÎÁ´±íºÍ±éÀú
+		// æµ‹è¯•æ„å»ºç¯å½¢é“¾è¡¨å’Œéå†
 		CircleSingleLinkedList circleSingleLinkedList = new CircleSingleLinkedList();
-		circleSingleLinkedList.addBoy(125);//¼ÓÈë5¸öĞ¡º¢½Úµã
+		circleSingleLinkedList.addBoy(125);//åŠ å…¥5ä¸ªå°å­©èŠ‚ç‚¹
 		circleSingleLinkedList.showBoy();
 		
-		//²âÊÔĞ¡º¢³öÈ¦ÊÇ·ñÕıÈ·
+		//æµ‹è¯•å°å­©å‡ºåœˆæ˜¯å¦æ­£ç¡®
 		circleSingleLinkedList.countBoy(5, 20, 125);
 	}
 	
 }
 
-//´´½¨Ò»¸ö»·ĞÎµÄµ¥ÏòÁ´±í
+//åˆ›å»ºä¸€ä¸ªç¯å½¢çš„å•å‘é“¾è¡¨
 class CircleSingleLinkedList {
-	//´´½¨Ò»¸öfirst½Úµã£¬µ±Ç°Ã»ÓĞ±àºÅ
+	//åˆ›å»ºä¸€ä¸ªfirstèŠ‚ç‚¹ï¼Œå½“å‰æ²¡æœ‰ç¼–å·
 	private Boy first = null;
-	//Ìí¼ÓĞ¡º¢½Úµã£¬¹¹½¨Ò»¸ö»·ĞÎµÄÁ´±í
+	//æ·»åŠ å°å­©èŠ‚ç‚¹ï¼Œæ„å»ºä¸€ä¸ªç¯å½¢çš„é“¾è¡¨
 	public void addBoy(int nums) {
-		//¶Ô ×öÒ»¸öÊı¾İĞ£Ñé
+		//å¯¹ åšä¸€ä¸ªæ•°æ®æ ¡éªŒ
 		if(nums < 1) {
-			System.out.println("numsµÄÖµ²»ÕıÈ·");
+			System.out.println("numsçš„å€¼ä¸æ­£ç¡®");
 			return;
 		}
-		Boy curBoy = null; //¸¨ÖúÖ¸Õë£¬°ïÖú¹¹½¨»·ĞÎÁĞ±í
-		//Ê¹ÓÃforÀ´´´½¨ÎÒÃÇµÄ»·ĞÎÁ´±í
+		Boy curBoy = null; //è¾…åŠ©æŒ‡é’ˆï¼Œå¸®åŠ©æ„å»ºç¯å½¢åˆ—è¡¨
+		//ä½¿ç”¨foræ¥åˆ›å»ºæˆ‘ä»¬çš„ç¯å½¢é“¾è¡¨
 		for (int i = 1; i <= nums; i++) {
-			//¸ù¾İ±àºÅ£¬´´½¨Ğ¡º¢½Úµã
+			//æ ¹æ®ç¼–å·ï¼Œåˆ›å»ºå°å­©èŠ‚ç‚¹
 			Boy boy = new Boy(i);
-			//Èç¹ûÊÇµÚÒ»¸öĞ¡º¢
+			//å¦‚æœæ˜¯ç¬¬ä¸€ä¸ªå°å­©
 			if (i == 1) {
 				first = boy;
-				first.setNext(first);//¹¹³É»·
-				curBoy = first; //ÈÃcurboyÖ¸ÏòµÚÒ»¸öĞ¡º¢
+				first.setNext(first);//æ„æˆç¯
+				curBoy = first; //è®©curboyæŒ‡å‘ç¬¬ä¸€ä¸ªå°å­©
 			} else {
 				curBoy.setNext(boy);
 				boy.setNext(first);
@@ -43,75 +43,75 @@ class CircleSingleLinkedList {
 		}
 	}
 	
-	//±éÀúµ±Ç°µÄ»·ĞÎÁ´±í
+	//éå†å½“å‰çš„ç¯å½¢é“¾è¡¨
 	public void showBoy() {
-		//ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ
+		//åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º
 		if (first == null) {
-			System.out.println("Ã»ÓĞÈÎºÎĞ¡º¢");
+			System.out.println("æ²¡æœ‰ä»»ä½•å°å­©");
 			return;
 		}
-		//ÒòÎªfirst²»ÄÜ¶¯£¬Òò´ËÎÒÃ»ÈÔÈ»ĞèÒªÊ¹ÓÃÒ»¸ö¸¨ÖúÖ¸ÕëÍê³É±éÀú
+		//å› ä¸ºfirstä¸èƒ½åŠ¨ï¼Œå› æ­¤æˆ‘æ²¡ä»ç„¶éœ€è¦ä½¿ç”¨ä¸€ä¸ªè¾…åŠ©æŒ‡é’ˆå®Œæˆéå†
 		Boy curBoy = first;
 		while(true) {
-			System.out.println("Ğ¡º¢µÄ±àºÅ" + curBoy.getNo());
-			if (curBoy.getNext() == first) {//ËµÃ÷ÒÑ¾­±éÀúÍê±Ï
+			System.out.println("å°å­©çš„ç¼–å·" + curBoy.getNo());
+			if (curBoy.getNext() == first) {//è¯´æ˜å·²ç»éå†å®Œæ¯•
 				break;
 			}
-			curBoy = curBoy.getNext();//curBoyºóÒÆ
+			curBoy = curBoy.getNext();//curBoyåç§»
 		}
 	}
 	
-	//¸ù¾İÓÃ»§µÄÊäÈë£¬¼ÆËã³öĞ¡º¢³öÈ¦µÄË³Ğò
+	//æ ¹æ®ç”¨æˆ·çš„è¾“å…¥ï¼Œè®¡ç®—å‡ºå°å­©å‡ºåœˆçš„é¡ºåº
 	/**
-	 * @param startNo ±íÊ¾´ÓµÚ¼¸¸öĞ¡º¢¿ªÊ¼ÊıÊı
-	 * @param countNum ±íÊ¾Êı¼¸ÏÂ
-	 * @param nums ±íÊ¾×î³õÓĞ¶àÉÙĞ¡º¢ÔÚÈ¦ÖĞ
+	 * @param startNo è¡¨ç¤ºä»ç¬¬å‡ ä¸ªå°å­©å¼€å§‹æ•°æ•°
+	 * @param countNum è¡¨ç¤ºæ•°å‡ ä¸‹
+	 * @param nums è¡¨ç¤ºæœ€åˆæœ‰å¤šå°‘å°å­©åœ¨åœˆä¸­
 	 */
 	public void countBoy(int startNo, int countNum, int nums) {
-		//ÏÈ¶ÔÊı¾İ½øĞĞĞ£Ñé
+		//å…ˆå¯¹æ•°æ®è¿›è¡Œæ ¡éªŒ
 		if (first == null || startNo < 1 || startNo > nums) {
-			System.out.println("²ÎÊıÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë");
+			System.out.println("å‚æ•°è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥");
 			return;
 		}
-		//´´½¨Ò»¸ö¸¨ÖúÖ¸Õë£¬°ïÖúÍê³ÉĞ¡º¢³öÈ¦
+		//åˆ›å»ºä¸€ä¸ªè¾…åŠ©æŒ‡é’ˆï¼Œå¸®åŠ©å®Œæˆå°å­©å‡ºåœˆ
 		Boy helper = first;
-		//ĞèÇó´´½¨Ò»¸ö¸¨ÖúÖ¸Õë£¨±äÁ¿£©helper£¬ÊÂÏÈÓ¦¸ÃÖ¸Ïò»·ĞÎÁ´±íµÄ×îºóÕâ¸ö½Úµã
+		//éœ€æ±‚åˆ›å»ºä¸€ä¸ªè¾…åŠ©æŒ‡é’ˆï¼ˆå˜é‡ï¼‰helperï¼Œäº‹å…ˆåº”è¯¥æŒ‡å‘ç¯å½¢é“¾è¡¨çš„æœ€åè¿™ä¸ªèŠ‚ç‚¹
 		while(true) {
-			if(helper.getNext() == first) {//ËµÃ÷helperÖ¸Ïò×îºóĞ¡º¢½Úµã
+			if(helper.getNext() == first) {//è¯´æ˜helperæŒ‡å‘æœ€åå°å­©èŠ‚ç‚¹
 				break;
 			}
 			helper = helper.getNext();
 		}
-		//Ğ¡º¢±¨ÊıÇ°£¬ÏÈÈÃfirstºÍhelperÒÆ¶¯k-1´Î
+		//å°å­©æŠ¥æ•°å‰ï¼Œå…ˆè®©firstå’Œhelperç§»åŠ¨k-1æ¬¡
 		for (int i = 0; i < startNo - 1; i++) {
 			first = first.getNext();
 			helper = helper.getNext();
 		}
-		//µ±Ğ¡º¢±¨ÊıÊ±£¬ÈÃfirstºÍhelperÖ¸ÕëÍ¬Ê±µÄÒÆ¶¯m -1´Î£¬È»ºó³öÈ¦
-		//ÕâÀíÊÇÒ»¸öÑ­»·²Ù×÷£¬Ö®µÀÈ¦ÖĞÖ»ÓĞÒ»¸ö½Úµã
+		//å½“å°å­©æŠ¥æ•°æ—¶ï¼Œè®©firstå’ŒhelperæŒ‡é’ˆåŒæ—¶çš„ç§»åŠ¨m -1æ¬¡ï¼Œç„¶åå‡ºåœˆ
+		//è¿™ç†æ˜¯ä¸€ä¸ªå¾ªç¯æ“ä½œï¼Œä¹‹é“åœˆä¸­åªæœ‰ä¸€ä¸ªèŠ‚ç‚¹
 		while(true) {
-			if(helper == first) {//ËµÃ÷È¦ÖĞÖ»ÓĞÒ»¸ö½Úµã
+			if(helper == first) {//è¯´æ˜åœˆä¸­åªæœ‰ä¸€ä¸ªèŠ‚ç‚¹
 				break;
 			}
-			//ÈÃfirstºÍhelperÖ¸ÕëÍ¬Ê±µÄÒÆ¶¯countNum -1
+			//è®©firstå’ŒhelperæŒ‡é’ˆåŒæ—¶çš„ç§»åŠ¨countNum -1
 			for (int i = 0; i < countNum - 1; i++) {
 				first = first.getNext();
 				helper = helper.getNext();
 			}
-			//ÕâÊ±firstÖ¸ÏòµÄ½Úµã¾ÍÊÇÒª³öÈ¦µÄĞ¡º¢½Úµã
-			System.out.println("Ğ¡º¢" + first.getNo() + "³öÈ¦");
-			//ÕâÊ±½«firstÖ¸ÏòµÄĞ¡º¢½Úµã³öÈ¦
+			//è¿™æ—¶firstæŒ‡å‘çš„èŠ‚ç‚¹å°±æ˜¯è¦å‡ºåœˆçš„å°å­©èŠ‚ç‚¹
+			System.out.println("å°å­©" + first.getNo() + "å‡ºåœˆ");
+			//è¿™æ—¶å°†firstæŒ‡å‘çš„å°å­©èŠ‚ç‚¹å‡ºåœˆ
 			first = first.getNext();
 			helper.setNext(first);
 		}
-		System.out.println("×îºóÁôÔÚÈ¦ÖĞµÄĞ¡º¢±àºÅ"+first.getNo());
+		System.out.println("æœ€åç•™åœ¨åœˆä¸­çš„å°å­©ç¼–å·"+first.getNo());
 	}
 }
 
-//´´½¨Ò»¸öBoyÀà£¬±íÊ¾Ò»¸ö½Úµã
+//åˆ›å»ºä¸€ä¸ªBoyç±»ï¼Œè¡¨ç¤ºä¸€ä¸ªèŠ‚ç‚¹
 class Boy {
-	private int no;//±àºÅ
-	private Boy next;//Ö¸ÏòÏÂÒ»¸ö½Úµã£¬Ä¬ÈÏnull
+	private int no;//ç¼–å·
+	private Boy next;//æŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ï¼Œé»˜è®¤null
 	public Boy(int no) {
 		this.no = no;
 	}
