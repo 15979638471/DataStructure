@@ -51,12 +51,12 @@ public class HeapSort {
 	}
 	
 	public static void main(String[] args) {
-//		int[] arr = {4, 6, 8, 5, 9};
-		int[] arr = new int[800];
+		// int[] arr = {4, 6, 8, 5, 9};
+		int[] arr = new int[8000000];
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (int) (Math.random() * 800);
+			arr[i] = (int) (Math.random() * 8000000);
 		}
 		heapSort(arr);
-		System.out.println(Arrays.toString(arr));
+		// System.out.println(Arrays.toString(arr));
 	}
 }
