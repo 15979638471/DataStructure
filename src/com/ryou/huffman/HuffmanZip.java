@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +33,7 @@ public class HuffmanZip {
 		}
 		//获得huffman编码数组
 		byte[] codingBytes = getCodingBytes(codingStr.toString());
-		
+		//返回HuffmanCoding封装对象
 		return new HuffmanCoding(codingBytes, dictionary, codingStr.length());
 	}
 	
@@ -138,24 +136,25 @@ public class HuffmanZip {
 	 */
 	public byte[] unzip(HuffmanCoding huffmanCoding) {
 		byte[] coding = huffmanCoding.getCoding();
-//		int zipBitlen = huffmanCoding.getZipBitLength();
+		Map<Byte, String> dictionary = huffmanCoding.getDictionary();
 		
 		//获得压缩后的二进制字符串
 		StringBuilder builder = new StringBuilder();
 		for(int i = 0;i < coding.length;i++) {
 			String bitString = byteToBitString(coding[i]);
-			if(i == coding.length - 1) { //如果是最后一位
+			if(i == coding.length - 1) { //如果是最后一位，则需要裁剪
 				bitString = bitString.substring(bitString.length() - (huffmanCoding.getZipBitLength() % 8));
 			}
 			builder.append(bitString);
 		}
 		
-		//将map字典调转key和value
+		//将dictionary字典调转key和value
 		Map<String,Byte> map = new HashMap<>();
-		for (Map.Entry<Byte,String> entry : huffmanCoding.getDictionary().entrySet()) {
+		for (Map.Entry<Byte,String> entry : dictionary.entrySet()) {
 			map.put(entry.getValue(), entry.getKey());
 		}
 		
+		//将压缩后的二进制字符串解压成byte数组
 		int pre = 0,end = 1;
 		ArrayList<Byte> list = new ArrayList<Byte>();
 		while(end <= builder.length()) {
@@ -166,11 +165,10 @@ public class HuffmanZip {
 			}
 			end++;
 		}
-		Byte[] arr = new Byte[list.size()];
-		list.toArray(arr);
-		byte[] retArr = new byte[arr.length];
-		for (int i = 0;i < arr.length;i++) {
-			retArr[i] = arr[i];
+		int size = list.size();
+		byte[] retArr = new byte[size];
+		for (int i = 0;i < size;i++) {
+			retArr[i] = list.get(i);
 		}
 		return retArr;
 	}
@@ -181,7 +179,9 @@ public class HuffmanZip {
 	 * @return 转换后的String
 	 */
 	private String byteToBitString(byte b) {
+		//不满8位则需要补位
 		String str = Integer.toBinaryString(b | 256);
+		//超过八位则需要裁剪
 		return str.substring(str.length() - 8);
 	}
 	
@@ -196,18 +196,18 @@ public class HuffmanZip {
 	public void fileZip(String from, String to) throws IOException {
 		File ff = new File(from);
 		if(!ff.exists()) {
-			throw new IOException("from地址的文件不存在，请检查地址是否正确！");
+			throw new IOException(from + "地址的文件不存在，请检查地址是否正确！");
 		}
-		String fileName = ff.getName();
 		try(FileInputStream fis = new FileInputStream(ff);
 			FileOutputStream fos = new FileOutputStream(to);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);) {
-			
+			//读取文件并以二进制形式存放在byte数组中
 			int size = fis.available();
 			byte[] fromByteArr = new byte[size];
 			fis.read(fromByteArr);
-			
+			//解压
 			HuffmanCoding huffmanCoding = zip(fromByteArr);
+			//将HuffmanCoding封装对象以对象形式写入到文件中
 			oos.writeObject(huffmanCoding);;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -217,15 +217,16 @@ public class HuffmanZip {
 	public void fileUnzip(String from, String to) throws IOException {
 		File ff = new File(from);
 		if(!ff.exists()) {
-			throw new IOException("from地址的文件不存在，请检查地址是否正确！");
+			throw new IOException(from + "地址的文件不存在，请检查地址是否正确！");
 		}
 		try(FileInputStream fio = new FileInputStream(ff);
 			ObjectInputStream oio = new ObjectInputStream(fio);
 			FileOutputStream foo = new FileOutputStream(to)) {
-			
+			//读取解压文件，获得HuffmanCoding封装对象
 			HuffmanCoding huffmanCoding = (HuffmanCoding) oio.readObject();
+			//获得解压后的byte数组
 			byte[] unzip = unzip(huffmanCoding);
-			
+			//写入到文件中
 			foo.write(unzip);
 		} catch (Exception e) {
 			System.out.println(e);
