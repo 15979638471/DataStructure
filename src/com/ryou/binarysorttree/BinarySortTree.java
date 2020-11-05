@@ -6,10 +6,6 @@ public class BinarySortTree {
 	public Node getRoot() {
 		return root;
 	}
-
-	public void setRoot(Node root) {
-		this.root = root;
-	}
 	
 	public void add(Node node) {
 		if(root == null) {
