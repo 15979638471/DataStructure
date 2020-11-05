@@ -34,7 +34,7 @@ public class BinarySortTree {
 	
 	public void show() {
 		if(root == null) {
-			System.out.println("二叉树排序树为空！");
+			System.out.println("avl树为空！");
 		}
 		infixOrder(root);
 	}
@@ -54,7 +54,7 @@ public class BinarySortTree {
 	
 	public Node search(int value) {
 		if(this.root == null) {
-			System.out.println("二叉排序树为空！");
+			System.out.println("avl树为空！");
 			return null;
 		}
 		Node cur = root;
@@ -79,7 +79,7 @@ public class BinarySortTree {
 	
 	public Node delete(int value) {
 		if(this.root == null) {
-			System.out.println("二叉排序树为空！");
+			System.out.println("avl树为空！");
 			return null;
 		}
 		Node parent = null; //保存删除结点的父结点
